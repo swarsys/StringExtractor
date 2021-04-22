@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.7
+  Created with Projucer version: 6.0.8
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -32,25 +32,25 @@ DirectoryOpener::DirectoryOpener ()
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    label.reset (new Label ("new label",
-                            TRANS("Input File")));
+    label.reset (new juce::Label ("new label",
+                                  TRANS("Input File")));
     addAndMakeVisible (label.get());
-    label->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    label->setJustificationType (Justification::centredLeft);
+    label->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    label->setJustificationType (juce::Justification::centredLeft);
     label->setEditable (false, false, false);
-    label->setColour (TextEditor::textColourId, Colours::black);
-    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    label->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    label->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     label->setBounds (26, 24, 80, 24);
 
-    fileBrowse.reset (new TextButton ("fileBrowse"));
+    fileBrowse.reset (new juce::TextButton ("fileBrowse"));
     addAndMakeVisible (fileBrowse.get());
     fileBrowse->setButtonText (TRANS("Browse"));
     fileBrowse->addListener (this);
 
     fileBrowse->setBounds (32, 96, 150, 24);
 
-    filePath.reset (new TextEditor ("filePath"));
+    filePath.reset (new juce::TextEditor ("filePath"));
     addAndMakeVisible (filePath.get());
     filePath->setMultiLine (false);
     filePath->setReturnKeyStartsNewLine (false);
@@ -58,22 +58,22 @@ DirectoryOpener::DirectoryOpener ()
     filePath->setScrollbarsShown (true);
     filePath->setCaretVisible (true);
     filePath->setPopupMenuEnabled (true);
-    filePath->setText (String());
+    filePath->setText (juce::String());
 
     filePath->setBounds (32, 56, 416, 24);
 
-    label2.reset (new Label ("new label",
-                             TRANS("Folder to Process")));
+    label2.reset (new juce::Label ("new label",
+                                   TRANS("Folder to Process")));
     addAndMakeVisible (label2.get());
-    label2->setFont (Font (15.00f, Font::plain).withTypefaceStyle ("Regular"));
-    label2->setJustificationType (Justification::centredLeft);
+    label2->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    label2->setJustificationType (juce::Justification::centredLeft);
     label2->setEditable (false, false, false);
-    label2->setColour (TextEditor::textColourId, Colours::black);
-    label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    label2->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    label2->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     label2->setBounds (32, 160, 150, 24);
 
-    folderPath.reset (new TextEditor ("folderPath"));
+    folderPath.reset (new juce::TextEditor ("folderPath"));
     addAndMakeVisible (folderPath.get());
     folderPath->setMultiLine (false);
     folderPath->setReturnKeyStartsNewLine (false);
@@ -81,18 +81,18 @@ DirectoryOpener::DirectoryOpener ()
     folderPath->setScrollbarsShown (true);
     folderPath->setCaretVisible (true);
     folderPath->setPopupMenuEnabled (true);
-    folderPath->setText (String());
+    folderPath->setText (juce::String());
 
     folderPath->setBounds (32, 192, 408, 24);
 
-    folderBrowse.reset (new TextButton ("folderBrowse"));
+    folderBrowse.reset (new juce::TextButton ("folderBrowse"));
     addAndMakeVisible (folderBrowse.get());
     folderBrowse->setButtonText (TRANS("Browse"));
     folderBrowse->addListener (this);
 
     folderBrowse->setBounds (32, 240, 150, 24);
 
-    btnProcess.reset (new TextButton ("btnProcess"));
+    btnProcess.reset (new juce::TextButton ("btnProcess"));
     addAndMakeVisible (btnProcess.get());
     btnProcess->setButtonText (TRANS("Process"));
     btnProcess->addListener (this);
@@ -101,6 +101,9 @@ DirectoryOpener::DirectoryOpener ()
 
 
     //[UserPreSize]
+    captions.clear();
+    
+    filePath->setText("");
     //[/UserPreSize]
 
     setSize (600, 400);
@@ -129,12 +132,12 @@ DirectoryOpener::~DirectoryOpener()
 }
 
 //==============================================================================
-void DirectoryOpener::paint (Graphics& g)
+void DirectoryOpener::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colour (0xff323e44));
+    g.fillAll (juce::Colour (0xff323e44));
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -149,7 +152,7 @@ void DirectoryOpener::resized()
     //[/UserResized]
 }
 
-void DirectoryOpener::buttonClicked (Button* buttonThatWasClicked)
+void DirectoryOpener::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
@@ -183,64 +186,53 @@ void DirectoryOpener::buttonClicked (Button* buttonThatWasClicked)
 
 void DirectoryOpener::folderBrowser()
 {
-    FileChooser myChooser("Choose a directory...",File::getCurrentWorkingDirectory(),"*.cpp,*.txt,*.h",
-    true);
+    juce::FileChooser myChooser("Choose a directory...", juce::File("/Users/swarsys/Documents/GitHub"), "*.cpp,*.txt,*.h", true);
+    
     if (myChooser.browseForDirectory())
     {
         auto result = myChooser.getURLResult();
-        folderPathStr = result.isLocalFile() ? result.getLocalFile().getFullPathName()
-                                                        : result.toString (true);
-        folderPath->setText (folderPathStr);
+        folderPath->setText (result.getLocalFile().getFullPathName());
     }
 }
+
 void DirectoryOpener::fileBrowser()
 {
-    FileChooser myChooser ("Please select the file you want to load...",
-    File::getCurrentWorkingDirectory(),
-    "*.cpp,*.txt,*.h");
+    juce::FileChooser myChooser ("Please select the file you want to load...",
+                                 juce::File("/Users/swarsys/Documents/GitHub"),
+                                 "*.cpp,*.txt,*.h");
     if (myChooser.browseForFileToOpen())
     {
-        File ourFile (myChooser.getResult());
-        filePathStr = ourFile.getFullPathName();
-        filePath->setText (filePathStr);
+        juce::File ourFile (myChooser.getResult());
+        filePath->setText (ourFile.getFullPathName());
+        
+        // import captions already parsed
+        captions.clear();
+        
+        juce::StringArray lines;
+        ourFile.readLines(lines);
+        
+        for (juce::String line : lines) {
+            int p = line.indexOf(" =");
+            //jassert(p > 0);
+            if (p > 0) {
+                captions.add(line.substring(0, p));
+            }
+        }
     }
 }
 
 void DirectoryOpener::process()
 {
-    if (filePathStr.isNotEmpty())
-    {
-      processFile();
-    }
-    if (folderPathStr.isNotEmpty())
+    if (folderPath->getText().isNotEmpty())
     {
         processFolder();
     }
 
 }
 
-void DirectoryOpener::processFile()
+void DirectoryOpener::processFolder()
 {
-    int fir = 0, sec = 0;
-    StringArray data,tempData;
-    data.clear();
-    tempData.clear();
-    File ourFile (filePathStr);
-    String wholeFile;
-    wholeFile.clear();
-    wholeFile = ourFile.loadFileAsString();
-    fir = wholeFile.indexOf("TRANS(");
-    while (fir > 1)
-    {
-        sec = wholeFile.indexOf(fir,")");
-        String fetched =  wholeFile.substring(fir + 6, sec );
-        if (!data.contains(fetched +  " = " + fetched))
-        {
-           data.add(fetched +  " = " + fetched);
-        }
-        fir = wholeFile.indexOf(sec, "TRANS(");
-    }
-    File f = juce::File::getCurrentWorkingDirectory().getChildFile("stringData.txt");
+    juce::File f(filePath->getText());
     if( !f.existsAsFile() )
     {
         auto result = f.create();
@@ -251,82 +243,32 @@ void DirectoryOpener::processFile()
             return;  //bail
         }
     }
-    else
-    {
-        String wholeFile = f.loadFileAsString();
-        tempData.addLines(wholeFile);
-        for (int a= 0; a < tempData.size(); a++)
-        {
-            if (data.contains(tempData[a]))
-            {
-               data.removeString(tempData[a]);
-            
-            }
-        }
 
-    }
-    for (int a= 0; a < data.size(); a++  )
-    {
-        f.appendText(data[a] +"\n");
-    }
-
-}
-void DirectoryOpener::processFolder()
-{
-    StringArray data,tempData;
-    data.clear();
-    tempData.clear();
-    juce::DirectoryIterator itr(folderPathStr, true,"*.cpp, *.h, *.txt");
+    juce::DirectoryIterator itr(folderPath->getText(), true,"*.cpp, *.h, *.txt");
     while (itr.next())
     {
         int fir = 0, sec = 0;
-        File theFileItFound (itr.getFile());
-        String wholeFile = theFileItFound.loadFileAsString();
+        juce::File theFileItFound (itr.getFile());
+        juce::String wholeFile = theFileItFound.loadFileAsString();
         fir = wholeFile.indexOf("TRANS(");
         while (fir > 1)
         {
             sec = wholeFile.indexOf(fir,")");
-            String fetched =  wholeFile.substring(fir + 6, sec );
-            if (!data.contains(fetched +  " = " + fetched))
+            juce::String fetched = wholeFile.substring(fir + 6, sec ).trim();
+            while (!fetched.endsWith("\"")) {
+                sec = wholeFile.indexOf(sec + 1, ")");
+                jassert(sec > fir);
+                fetched = wholeFile.substring(fir + 6, sec ).trim();
+            }
+            if (!captions.contains(fetched))
             {
-            data.add(fetched +  " = " + fetched);
+                captions.add(fetched);
+                
+                f.appendText(fetched + " = " + fetched + "\n");
             }
             fir = wholeFile.indexOf(sec, "TRANS(");
         }
-
     }
-    File f = juce::File::getCurrentWorkingDirectory() .getChildFile ("stringData.txt");
-    if( !f.existsAsFile() )
-    {
-        auto result = f.create();
-        if( !result.wasOk() )
-        {
-            DBG( "failed creating file!" );
-            jassertfalse; //pause so we can see the error message
-            return;  //bail
-        }
-    }
-    else
-    {
-        String wholeFile = f.loadFileAsString();
-         tempData.addLines(wholeFile);
-         for (int a= 0; a < tempData.size(); a++)
-         {
-
-             if (data.contains(tempData[a]))
-             {
-                data.removeString(tempData[a]);
-             
-             }
-         }
-
-    }
-    for (int a= 0; a < data.size(); a++  )
-    {
-
-        f.appendText(data[a] +"\n");
-    }
-
 }
 
 //[/MiscUserCode]
@@ -342,7 +284,7 @@ void DirectoryOpener::processFolder()
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="DirectoryOpener" componentName=""
-                 parentClasses="public Component" constructorParams="" variableInitialisers=""
+                 parentClasses="public juce::Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="ff323e44"/>

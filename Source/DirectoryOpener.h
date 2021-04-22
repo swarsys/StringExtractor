@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.7
+  Created with Projucer version: 6.0.8
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -33,8 +33,8 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class DirectoryOpener  : public Component,
-                         public Button::Listener
+class DirectoryOpener  : public juce::Component,
+                         public juce::Button::Listener
 {
 public:
     //==============================================================================
@@ -47,30 +47,29 @@ public:
     void fileBrowser();
     void folderBrowser();
     void process();
-    void processFile();
     void processFolder();
 
     //[/UserMethods]
 
-    void paint (Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    String filePathStr, folderPathStr;
+    juce::StringArray captions;
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<Label> label;
-    std::unique_ptr<TextButton> fileBrowse;
-    std::unique_ptr<TextEditor> filePath;
-    std::unique_ptr<Label> label2;
-    std::unique_ptr<TextEditor> folderPath;
-    std::unique_ptr<TextButton> folderBrowse;
-    std::unique_ptr<TextButton> btnProcess;
+    std::unique_ptr<juce::Label> label;
+    std::unique_ptr<juce::TextButton> fileBrowse;
+    std::unique_ptr<juce::TextEditor> filePath;
+    std::unique_ptr<juce::Label> label2;
+    std::unique_ptr<juce::TextEditor> folderPath;
+    std::unique_ptr<juce::TextButton> folderBrowse;
+    std::unique_ptr<juce::TextButton> btnProcess;
 
 
     //==============================================================================

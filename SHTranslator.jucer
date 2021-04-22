@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="I98j9A" name="SHTranslator" projectType="guiapp" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              jucerVersion="5.4.7">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="O2cegt" name="SHTranslator">
     <GROUP id="{65000175-19F5-ABDA-2696-47A9546B6CDB}" name="Source">
       <FILE id="U4kp4k" name="DirectoryOpener.cpp" compile="1" resource="0"

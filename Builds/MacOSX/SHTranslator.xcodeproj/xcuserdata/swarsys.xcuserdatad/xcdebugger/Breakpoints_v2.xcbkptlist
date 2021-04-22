@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "6E298F0A-C2E3-48ED-8536-5EE35B64183E"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            uuid = "DF523D4A-2E53-44B2-ABAB-955EBDDD0868"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Source/DirectoryOpener.cpp"
             timestampString = "639903207.5315109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "DirectoryOpener::processFolder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -22,15 +24,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            uuid = "197B31D0-6E28-4583-BBE9-12987B0086C3"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Source/DirectoryOpener.cpp"
             timestampString = "639903263.4784451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "DirectoryOpener::processFolder()"
             landmarkType = "7">
          </BreakpointContent>
